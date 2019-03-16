@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     setupLayout()
     setupDummyCards()
-    
   }
   
   fileprivate func setupDummyCards() {
