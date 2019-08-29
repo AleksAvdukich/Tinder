@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F215B0D229F148800A525C9 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F215B0C229F148800A525C9 /* CardViewModel.swift */; };
+		1F321106231864FF00D57E70 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F321105231864FF00D57E70 /* Advertiser.swift */; };
 		1F7A0DA922430DE9008E202C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A0DA822430DE9008E202C /* User.swift */; };
 		1FE206BD223D658E008DBF88 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE206BC223D658E008DBF88 /* CardView.swift */; };
 		1FEB0DC42239DFA5007494FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB0DC32239DFA5007494FA /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		1F215B0C229F148800A525C9 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		1F321105231864FF00D57E70 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		1F7A0DA822430DE9008E202C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1FE206BC223D658E008DBF88 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1FEB0DC02239DFA5007494FA /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				1F7A0DA822430DE9008E202C /* User.swift */,
+				1F321105231864FF00D57E70 /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				1FEB0DC62239DFA5007494FA /* HomeController.swift in Sources */,
 				1FEB0DDA223C1DED007494FA /* HomeBottomControlsStackView.swift in Sources */,
+				1F321106231864FF00D57E70 /* Advertiser.swift in Sources */,
 				1FEB0DC42239DFA5007494FA /* AppDelegate.swift in Sources */,
 				1FEB0DD72239E260007494FA /* Extensions+UIView.swift in Sources */,
 				1F215B0D229F148800A525C9 /* CardViewModel.swift in Sources */,
@@ -349,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36763Q3UE3;
 				INFOPLIST_FILE = Tinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36763Q3UE3;
 				INFOPLIST_FILE = Tinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
