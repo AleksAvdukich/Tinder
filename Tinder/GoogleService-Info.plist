@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>260205861871-fq1n9o8rr9v592b26rt9r9fne8slfv5k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.260205861871-fq1n9o8rr9v592b26rt9r9fne8slfv5k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBdXeSJuaMbkKoxdYPsVGmAeWSUGsjCLnU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>260205861871</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ios-programming.Tinder</string>
+	<key>PROJECT_ID</key>
+	<string>tinder-e59ad</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tinder-e59ad.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:260205861871:ios:a5a54d99226e105c</string>
+	<key>DATABASE_URL</key>
+	<string>https://tinder-e59ad.firebaseio.com</string>
+</dict>
+</plist>
