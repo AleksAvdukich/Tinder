@@ -10,6 +10,22 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.bindableImage.value = image
+//        registrationViewModel.image = image
+        //        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)//устанавливаем выбранное фото из библиотеки на кнопку
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+}
+
 class RegistrationController: UIViewController {
     
     //UI Components
@@ -21,8 +37,17 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         return button
     }()
+    
+    @objc func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+    }
     
     let fullNameTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16)
@@ -76,6 +101,7 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    //Регистрация пользователя в Firebase
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
         print("Register our User in Firebase Auth")
@@ -116,11 +142,8 @@ class RegistrationController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
-            print("Form is changing, is it valid?", isFormValid)
-            
-            self.registerButton.isEnabled = isFormValid
-            
+        registrationViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
+            guard let isFormValid = isFormValid else { return }
             if isFormValid {
                 self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
                 self.registerButton.setTitleColor(.white, for: .normal)
@@ -129,6 +152,14 @@ class RegistrationController: UIViewController {
                 self.registerButton.setTitleColor(.gray, for: .normal)
             }
         }
+        registrationViewModel.bindableImage.bind { [unowned self] (img) in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        //Установка фото на кнопку selectPhotoButton посредством реактивного программирования
+//        registrationViewModel.imageObserver = { [unowned self] img in
+//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        }
     }
     
     fileprivate func setupTapGesture() {
