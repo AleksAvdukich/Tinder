@@ -15,7 +15,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
-//        registrationViewModel.image = image
+        //        registrationViewModel.image = image
         //        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)//устанавливаем выбранное фото из библиотеки на кнопку
         dismiss(animated: true, completion: nil)
     }
@@ -101,25 +101,22 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    let registeringHUD = JGProgressHUD(style: .dark)
+    
     //Регистрация пользователя в Firebase
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        print("Register our User in Firebase Auth")
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
-            
+        registrationViewModel.performRegistration { [weak self] (err) in
             if let err = err {
-                print(err)
-                self.showHUDWithError(error: err)
+                self?.showHUDWithError(error: err)
                 return
             }
-            print("Successfully registered user:", res?.user.uid ?? "")
+            print("Finished registering our user")
         }
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark) //Всплывающее окно темного цвета для отображения прогресса, успеха, ошибки или других уведомлений.
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
@@ -144,22 +141,24 @@ class RegistrationController: UIViewController {
     fileprivate func setupRegistrationViewModelObserver() {
         registrationViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
             guard let isFormValid = isFormValid else { return }
-            if isFormValid {
-                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-                self.registerButton.setTitleColor(.white, for: .normal)
+            self.registerButton.isEnabled = isFormValid
+            self.registerButton.backgroundColor = isFormValid ? #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1) : .lightGray
+            self.registerButton.setTitleColor(isFormValid ? .white : .gray, for: .normal)
+        }
+        registrationViewModel.bindableImage.bind { [unowned self] (img) in self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            if isRegistering == true {
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
             } else {
-                self.registerButton.backgroundColor = .lightGray
-                self.registerButton.setTitleColor(.gray, for: .normal)
+                self.registeringHUD.dismiss()
             }
         }
-        registrationViewModel.bindableImage.bind { [unowned self] (img) in
-            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        
         //Установка фото на кнопку selectPhotoButton посредством реактивного программирования
-//        registrationViewModel.imageObserver = { [unowned self] img in
-//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-//        }
+        //        registrationViewModel.imageObserver = { [unowned self] img in
+        //            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        //        }
     }
     
     fileprivate func setupTapGesture() {
@@ -178,7 +177,7 @@ class RegistrationController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self) //будет цикл сохранения
+        //        NotificationCenter.default.removeObserver(self) //будет цикл сохранения
     }
     
     @objc fileprivate func handleKeyboardHide() {
