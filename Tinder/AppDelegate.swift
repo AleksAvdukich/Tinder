@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow()
     window?.makeKeyAndVisible()//показывает окно и делает его ключевым
-    window?.rootViewController = RegistrationController()
+    window?.rootViewController = HomeController()
     
     return true
   }

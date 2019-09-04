@@ -35,7 +35,7 @@ class CardViewModel {
     //Reactive Programming
     var imageIndexObserver: ((Int, UIImage?) -> ())?
     
-    //переход у след. фотографии
+    //переход к след. фотографии
     func advanceToNextPhoto() {
         imageIndex = min(imageIndex + 1, imageNames.count - 1)
     }
