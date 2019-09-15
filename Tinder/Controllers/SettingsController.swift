@@ -61,7 +61,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         
         fetchCurrentUser()
     }
-    
+    //Создали переменную которая везде переиспользуется
     var user: User?
     
     fileprivate func fetchCurrentUser() {
@@ -86,6 +86,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     
     fileprivate func loadUserPhotos() {
         guard let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) else { return }
+        //загружает из кеша
         SDWebImageManager.shared().loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
             self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
@@ -163,11 +164,14 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         case 1:
             cell.textField.placeholder = "Enter Name"
             cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
         case 2:
             cell.textField.placeholder = "Enter Profession"
             cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             cell.textField.placeholder = "Enter Age"
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
@@ -176,7 +180,18 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         }
         
         return cell
-        
+    }
+    
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
     }
     
     fileprivate func setupNavigationItems() {
@@ -184,9 +199,41 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
             UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
         ]
+    }
+    
+    //MARK: Сохранение в Firestore
+    
+    @objc fileprivate func handleSave() {
+        print("Saving our settings data into Firestore")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        //делаем словарь тк setData первым аргументом ожидает словарь
+        let locData: [String: Any] = [
+            "uid": uid,
+            "fullName": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        //Темное окно прогресса сохранения
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving Settings"
+        hud.show(in: view)
+        
+        //Сохранение данных в Firestore
+        Firestore.firestore().collection("users").document(uid).setData(locData) { (err) in
+            
+            hud.dismiss() //сохранили данные убираем окно прогресса
+            
+            if let err = err {
+                print("Failed to save user settings:", err)
+                return
+            }
+            
+            print("Finished saving user info")
+        }
     }
     
     @objc fileprivate func handleCancel() {
