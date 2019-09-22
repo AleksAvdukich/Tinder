@@ -18,6 +18,9 @@
 		1FC14ADD231E9B900055529F /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC14ADC231E9B900055529F /* Bindable.swift */; };
 		1FD17957232C305B0007D51C /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD17956232C305B0007D51C /* SettingsCell.swift */; };
 		1FD17959232EBB1F0007D51C /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD17958232EBB1F0007D51C /* AgeRangeCell.swift */; };
+		1FDAB0032335B807008C1818 /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAB0022335B807008C1818 /* Firebase+Utils.swift */; };
+		1FDAB0072335B832008C1818 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAB0052335B832008C1818 /* LoginViewModel.swift */; };
+		1FDAB0082335B832008C1818 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDAB0062335B832008C1818 /* LoginController.swift */; };
 		1FE206BD223D658E008DBF88 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE206BC223D658E008DBF88 /* CardView.swift */; };
 		1FEB0DC42239DFA5007494FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB0DC32239DFA5007494FA /* AppDelegate.swift */; };
 		1FEB0DC62239DFA5007494FA /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB0DC52239DFA5007494FA /* HomeController.swift */; };
@@ -42,6 +45,9 @@
 		1FC14ADC231E9B900055529F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		1FD17956232C305B0007D51C /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		1FD17958232EBB1F0007D51C /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
+		1FDAB0022335B807008C1818 /* Firebase+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
+		1FDAB0052335B832008C1818 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		1FDAB0062335B832008C1818 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		1FE206BC223D658E008DBF88 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1FEB0DC02239DFA5007494FA /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FEB0DC32239DFA5007494FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +79,7 @@
 		1F215B0A229F136F00A525C9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1FDAB0042335B832008C1818 /* Login */,
 				1FEB0DC52239DFA5007494FA /* HomeController.swift */,
 				1FC14AD4231AF0D00055529F /* RegistrationController.swift */,
 				1FC14AD8231C594E0055529F /* RegistrationViewModel.swift */,
@@ -97,6 +104,15 @@
 				1F321105231864FF00D57E70 /* Advertiser.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1FDAB0042335B832008C1818 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1FDAB0052335B832008C1818 /* LoginViewModel.swift */,
+				1FDAB0062335B832008C1818 /* LoginController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1FEB0DB72239DFA5007494FA = {
@@ -139,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				1FEB0DD62239E260007494FA /* Extensions+UIView.swift */,
+				1FDAB0022335B807008C1818 /* Firebase+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDAB0082335B832008C1818 /* LoginController.swift in Sources */,
 				1FC14ADD231E9B900055529F /* Bindable.swift in Sources */,
 				1FEB0DC62239DFA5007494FA /* HomeController.swift in Sources */,
 				1FC14AD9231C594E0055529F /* RegistrationViewModel.swift in Sources */,
@@ -326,7 +344,9 @@
 				1F321106231864FF00D57E70 /* Advertiser.swift in Sources */,
 				1FEB0DC42239DFA5007494FA /* AppDelegate.swift in Sources */,
 				1FD17959232EBB1F0007D51C /* AgeRangeCell.swift in Sources */,
+				1FDAB0072335B832008C1818 /* LoginViewModel.swift in Sources */,
 				1FEB0DD72239E260007494FA /* Extensions+UIView.swift in Sources */,
+				1FDAB0032335B807008C1818 /* Firebase+Utils.swift in Sources */,
 				1F215B0D229F148800A525C9 /* CardViewModel.swift in Sources */,
 				1FE206BD223D658E008DBF88 /* CardView.swift in Sources */,
 				1FB4AFB52321680E00E06EE3 /* SettingsController.swift in Sources */,
