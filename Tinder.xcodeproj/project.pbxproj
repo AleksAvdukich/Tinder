@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F215B0D229F148800A525C9 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F215B0C229F148800A525C9 /* CardViewModel.swift */; };
 		1F321106231864FF00D57E70 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F321105231864FF00D57E70 /* Advertiser.swift */; };
+		1F3F70AE233945E200360662 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F70AD233945E200360662 /* SwipingPhotosController.swift */; };
 		1F76239323380DEC000E5876 /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76239223380DEC000E5876 /* UserDetailsController.swift */; };
 		1F7A0DA922430DE9008E202C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A0DA822430DE9008E202C /* User.swift */; };
 		1FB4AFB52321680E00E06EE3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4AFB42321680E00E06EE3 /* SettingsController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		1F215B0C229F148800A525C9 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		1F321105231864FF00D57E70 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		1F3F70AD233945E200360662 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		1F76239223380DEC000E5876 /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		1F7A0DA822430DE9008E202C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1FB4AFB42321680E00E06EE3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				1F76239223380DEC000E5876 /* UserDetailsController.swift */,
+				1F3F70AD233945E200360662 /* SwipingPhotosController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				1FC14AD5231AF0D00055529F /* RegistrationController.swift in Sources */,
 				1F7A0DA922430DE9008E202C /* User.swift in Sources */,
 				1FD17957232C305B0007D51C /* SettingsCell.swift in Sources */,
+				1F3F70AE233945E200360662 /* SwipingPhotosController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
