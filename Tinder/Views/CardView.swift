@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol CardViewDelegate {
-    func didTapMoreInfo()
+    func didTapMoreInfo(cardViewModel: CardViewModel)
 }
 
 class CardView: UIView {
@@ -20,7 +20,7 @@ class CardView: UIView {
     var cardViewModel: CardViewModel! {
         didSet {
             //доступ к индексу 0 выдаст ошибку если imageNames.count == 0
-            let imageName = cardViewModel.imageNames.first ?? ""
+            let imageName = cardViewModel.imageUrls.first ?? ""
             //imageView.image = UIImage(named: imageName)
             //загрузка нашего изображения используя url
             if let url = URL(string: imageName) {
@@ -31,7 +31,7 @@ class CardView: UIView {
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
-            (0..<cardViewModel.imageNames.count).forEach { (_) in
+            (0..<cardViewModel.imageUrls.count).forEach { (_) in
                 let barView = UIView()
                 barView.backgroundColor = barDeselectedColor
                 barsStackView.addArrangedSubview(barView)
@@ -95,12 +95,7 @@ class CardView: UIView {
     }()
     
     @objc fileprivate func handleMoreInfo() {
-//        print("Present User Detail Page")
-        delegate?.didTapMoreInfo()
-//        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-//        let userDetailsController = UIViewController()
-//        userDetailsController.view.backgroundColor = .yellow
-//        rootViewController?.present(userDetailsController, animated: true)
+        delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
     }
     
     fileprivate func setupLayout() {

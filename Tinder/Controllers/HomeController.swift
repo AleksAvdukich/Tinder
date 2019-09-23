@@ -109,10 +109,11 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         cardView.fillSuperview()
     }
     
-    func didTapMoreInfo() {
-        print("Home Controller going to show user details now")
-        let userDetailController = UserDetailsController()
-        present(userDetailController, animated: true)
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        print("Home Controller:", cardViewModel.attributedString)
+        let userDetailsController = UserDetailsController()
+        userDetailsController.cardViewModel = cardViewModel
+        present(userDetailsController, animated: true)
     }
     
     @objc func handleSettings() {
