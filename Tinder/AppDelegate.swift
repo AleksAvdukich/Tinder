@@ -25,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow()
     window?.makeKeyAndVisible()//показывает окно и делает его ключевым
-//    window?.rootViewController = HomeController()
-    window?.rootViewController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal) 
+    window?.rootViewController = HomeController()
+    
+//    window?.rootViewController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     return true
   }

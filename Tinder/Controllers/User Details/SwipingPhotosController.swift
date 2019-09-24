@@ -10,20 +10,34 @@ import UIKit
 
 class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource {
 
-    let controllers = [
-        PhotoController(image: #imageLiteral(resourceName: "boost_icon")),
-        PhotoController(image: #imageLiteral(resourceName: "refresh_icon")),
-        PhotoController(image: #imageLiteral(resourceName: "like_icon")),
-        PhotoController(image: #imageLiteral(resourceName: "superlike_icon")),
-        PhotoController(image: #imageLiteral(resourceName: "dismiss_icon"))
-    ]
+    var cardViewModel: CardViewModel! {
+        didSet {
+            print(cardViewModel.attributedString)
+            controllers = cardViewModel.imageUrls.map({ (imageUrl) -> UIViewController in
+                let photoController = PhotoController(imageUrl: imageUrl)
+                return photoController
+            })
+            
+            setViewControllers([controllers.first!], direction: .forward, animated: false)
+        }
+    }
+    
+    var controllers = [UIViewController]() //пустой массив
+    
+//    let controllers = [
+//        PhotoController(image: #imageLiteral(resourceName: "boost_icon")),
+//        PhotoController(image: #imageLiteral(resourceName: "refresh_icon")),
+//        PhotoController(image: #imageLiteral(resourceName: "like_icon")),
+//        PhotoController(image: #imageLiteral(resourceName: "superlike_icon")),
+//        PhotoController(image: #imageLiteral(resourceName: "dismiss_icon"))
+//    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
         view.backgroundColor = .white
         
-        setViewControllers([controllers.first!], direction: .forward, animated: false)
+//        setViewControllers([controllers.first!], direction: .forward, animated: false)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -38,23 +52,24 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
         return controllers[index - 1]
     }
     
-    
 }
 
 class PhotoController: UIViewController {
     
     let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
     
-    init(image: UIImage) {
+    init(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            imageView.sd_setImage(with: url)
+        }
         super.init(nibName: nil, bundle: nil)
-        imageView.image = image
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
         imageView.fillSuperview()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
     }
     
     required init?(coder aDecoder: NSCoder) {
