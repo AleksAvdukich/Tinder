@@ -31,18 +31,6 @@ class HomeBottomControlsStackView: UIStackView {
         [refreshButton, dislikeButton, superLikeButton, likeButton, specialButton].forEach { (button) in
             self.addArrangedSubview(button)
         }
-        
-//        let arrayOfIcons = [UIImage.init(named: "refresh_icon"),UIImage.init(named: "dismiss_icon"),UIImage.init(named: "superlike_icon"),UIImage.init(named: "like_icon"),UIImage.init(named: "boost_icon"),]
-//
-//        let subviews = arrayOfIcons.map { (img) -> UIView in
-//            let button = UIButton(type: .system)
-//            button.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-//            return button
-//        }
-//
-//        subviews.forEach { (v) in
-//            addArrangedSubview(v)
-//        }
     }
     
     

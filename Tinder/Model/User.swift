@@ -40,17 +40,18 @@ struct User: ProducesCardViewModel {
         let attributedText = NSMutableAttributedString(string: name ?? "", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
         
         let ageString = age != nil ? "\(age!)" : "N\\A"
-        attributedText.append(NSAttributedString(string: "  \(ageString)", attributes: [.font : UIFont.systemFont(ofSize: 24, weight: .regular)]))
+        
+        attributedText.append(NSAttributedString(string: "  \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
         
         let professionString = profession != nil ? profession! : "Not available"
-        attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .regular)]))
-
-        var imageUrls = [String]()
+        attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        
+        var imageUrls = [String]() // empty string array
         if let url = imageUrl1 { imageUrls.append(url) }
         if let url = imageUrl2 { imageUrls.append(url) }
         if let url = imageUrl3 { imageUrls.append(url) }
         
-        return CardViewModel(imageNames: [imageUrl1 ?? "", imageUrl2 ?? "", imageUrl3 ?? ""], attributedString: attributedText, textAlignment: .left)
+        return CardViewModel(imageNames: imageUrls, attributedString: attributedText, textAlignment: .left)
     }
 }
 

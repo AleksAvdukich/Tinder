@@ -19,16 +19,16 @@ class LoginController: UIViewController {
     
     let emailTextField: CustomTextField = {
         let tf = CustomTextField(padding: 24, height: 50)
-        tf.backgroundColor = .white
         tf.placeholder = "Enter email"
+        tf.backgroundColor = .white
         tf.keyboardType = .emailAddress
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     let passwordTextField: CustomTextField = {
         let tf = CustomTextField(padding: 24, height: 50)
-        tf.backgroundColor = .white
         tf.placeholder = "Enter password"
+        tf.backgroundColor = .white
         tf.isSecureTextEntry = true
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
@@ -94,7 +94,7 @@ class LoginController: UIViewController {
     @objc fileprivate func handleBack() {
         navigationController?.popViewController(animated: true)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -150,5 +150,5 @@ class LoginController: UIViewController {
         view.addSubview(backToRegisterButton)
         backToRegisterButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
     }
-
+    
 }

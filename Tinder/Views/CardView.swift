@@ -20,13 +20,14 @@ class CardView: UIView {
     var cardViewModel: CardViewModel! {
         didSet {
             //доступ к индексу 0 выдаст ошибку если imageNames.count == 0
-            let imageName = cardViewModel.imageUrls.first ?? ""
-            //imageView.image = UIImage(named: imageName)
-            //загрузка нашего изображения используя url
-            if let url = URL(string: imageName) {
-                imageView.sd_setImage(with: url)
-            }
-            
+//            let imageName = cardViewModel.imageUrls.first ?? ""
+//            //imageView.image = UIImage(named: imageName)
+//            //загрузка нашего изображения используя url
+//            if let url = URL(string: imageName) {
+//                imageView.sd_setImage(with: url)
+//                imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
+//            }
+            swipingPhotosController.cardViewModel = self.cardViewModel
             
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
@@ -46,7 +47,7 @@ class CardView: UIView {
         cardViewModel.imageIndexObserver = { [weak self] (idx, imageUrl) in
             print("changing photo from view model")
             if let url = URL(string: imageUrl ?? "") {
-                self?.imageView.sd_setImage(with: url)
+                self?.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
             }
             
             self?.barsStackView.arrangedSubviews.forEach({ (v) in
@@ -57,6 +58,7 @@ class CardView: UIView {
     }
     
     //инкапсуляция
+    fileprivate let swipingPhotosController = SwipingPhotosController(isCardViewModel: true)
     fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
     fileprivate let gradientLayer = CAGradientLayer()
     fileprivate let informationLabel = UILabel()

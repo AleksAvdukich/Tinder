@@ -15,6 +15,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
+        registrationViewModel.checkFormValidity()
         //        registrationViewModel.image = image
         //        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)//устанавливаем выбранное фото из библиотеки на кнопку
         dismiss(animated: true, completion: nil)
@@ -27,6 +28,8 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
 }
 
 class RegistrationController: UIViewController {
+    
+    var delegate: LoginControllerDelegate?
     
     //UI Components
     let selectPhotoButton: UIButton = {
@@ -48,6 +51,9 @@ class RegistrationController: UIViewController {
         imagePickerController.delegate = self
         present(imagePickerController, animated: true)
     }
+    
+    lazy var selectPhotoButtonWidthAnchor = selectPhotoButton.widthAnchor.constraint(equalToConstant: 275)
+    lazy var selectPhotoButtonHeightAnchor = selectPhotoButton.heightAnchor.constraint(equalToConstant: 275)
     
     let fullNameTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16, height: 50)
@@ -112,6 +118,10 @@ class RegistrationController: UIViewController {
                 return
             }
             print("Finished registering our user")
+            
+            self?.dismiss(animated: true, completion: {
+                self?.delegate?.didFinishLoggingIn()
+            })
         }
     }
     
@@ -155,10 +165,6 @@ class RegistrationController: UIViewController {
                 self.registeringHUD.dismiss()
             }
         }
-        //Установка фото на кнопку selectPhotoButton посредством реактивного программирования
-        //        registrationViewModel.imageObserver = { [unowned self] img in
-        //            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-        //        }
     }
     
     fileprivate func setupTapGesture() {
@@ -220,11 +226,16 @@ class RegistrationController: UIViewController {
     
     //Метод для компактного отображения объектов при смене ориентации устройства
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        traitCollection.horizontalSizeClass
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
+            verticalStackView.distribution = .fillEqually
+            selectPhotoButtonHeightAnchor.isActive = false
+            selectPhotoButtonWidthAnchor.isActive = true
         } else {
             overallStackView.axis = .vertical
+            verticalStackView.distribution = .fill
+            selectPhotoButtonWidthAnchor.isActive = false
+            selectPhotoButtonHeightAnchor.isActive = true
         }
     }
     
@@ -239,6 +250,7 @@ class RegistrationController: UIViewController {
     
     @objc fileprivate func handleGoToLogin() {
         let loginController = LoginController()
+        loginController.delegate = delegate
         navigationController?.pushViewController(loginController, animated: true)
     }
     
@@ -247,7 +259,6 @@ class RegistrationController: UIViewController {
         
         view.addSubview(overallStackView)
         overallStackView.axis = .vertical
-        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
         overallStackView.spacing = 8
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
