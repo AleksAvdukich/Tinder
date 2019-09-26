@@ -46,9 +46,9 @@ class CardView: UIView {
     fileprivate func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] (idx, imageUrl) in
             print("changing photo from view model")
-            if let url = URL(string: imageUrl ?? "") {
-                self?.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
-            }
+//            if let url = URL(string: imageUrl ?? "") {
+//                self?.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder"), options: .continueInBackground)
+//            }
             
             self?.barsStackView.arrangedSubviews.forEach({ (v) in
                 v.backgroundColor = self?.barDeselectedColor
@@ -58,8 +58,8 @@ class CardView: UIView {
     }
     
     //инкапсуляция
-    fileprivate let swipingPhotosController = SwipingPhotosController(isCardViewModel: true)
-    fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    fileprivate let swipingPhotosController = SwipingPhotosController(isCardViewMode: true)
+//    fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c")) //!!!!!!
     fileprivate let gradientLayer = CAGradientLayer()
     fileprivate let informationLabel = UILabel()
     
@@ -104,11 +104,11 @@ class CardView: UIView {
         layer.cornerRadius = 10
         clipsToBounds = true
         
-        imageView.contentMode = .scaleAspectFill
-        addSubview(imageView)
-        imageView.fillSuperview()
+        let swipingPhotosView = swipingPhotosController.view!
+        addSubview(swipingPhotosView)
+        swipingPhotosView.fillSuperview()
         
-        setupBarsStackView()
+//        setupBarsStackView()
         
         //добавляет слой градиента
         setupGradientLayer()

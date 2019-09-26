@@ -41,7 +41,7 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
         view.addSubview(barsStackView)
         
         var paddingTop: CGFloat = 8
-        if !isCardViewModel {
+        if !isCardViewMode {
             paddingTop += UIApplication.shared.statusBarFrame.height
         }
         //        let paddingTop = UIApplication.shared.statusBarFrame.height + 8
@@ -59,10 +59,11 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
     
     var controllers = [UIViewController]() // blank array
     
-    fileprivate let isCardViewModel: Bool
     
-    init(isCardViewModel: Bool = false) {
-        self.isCardViewModel = isCardViewModel
+    fileprivate let isCardViewMode: Bool
+    
+    init(isCardViewMode: Bool = false) {
+        self.isCardViewMode = isCardViewMode
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
@@ -76,7 +77,7 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
         delegate = self
         view.backgroundColor = .white
         
-        if isCardViewModel {
+        if isCardViewMode {
             disableSwipingAbility()
         }
         
