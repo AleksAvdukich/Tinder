@@ -18,7 +18,12 @@ extension Firestore {
             }
             
             // fetched our user here
-            guard let dictionary = snapshot?.data() else { return }
+            guard let dictionary = snapshot?.data() else {
+                let error = NSError(domain: "com.lbta.swipematch", code: 500, userInfo: [NSLocalizedDescriptionKey: "No user found in Firestore"])
+                completion(nil, error)
+                return
+            }
+//            guard let dictionary = snapshot?.data() else { return }
             let user = User(dictionary: dictionary)
             completion(user, nil)
         }

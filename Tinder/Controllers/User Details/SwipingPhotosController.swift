@@ -59,7 +59,6 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
     
     var controllers = [UIViewController]() // blank array
     
-    
     fileprivate let isCardViewMode: Bool
     
     init(isCardViewMode: Bool = false) {
